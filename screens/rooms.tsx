@@ -20,7 +20,7 @@ import {
     Poppins_900Black_Italic 
 } from '@expo-google-fonts/poppins';
 import { useFonts } from 'expo-font';
-
+import { SearchSvg, RoomsSvg } from '../components/svg-icons';
 
 export default function Rooms() {
 
@@ -45,9 +45,15 @@ export default function Rooms() {
         Poppins_900Black_Italic 
         });
 
+
     return (
         <View style={styles.menu}>
             <Text style={styles.headerText}>Rooms</Text>
+            <View style={styles.icons}>
+                <SearchSvg style={styles.search}/>
+                <RoomsSvg />
+            </View>
+                        
         </View>
     );
 }
@@ -58,6 +64,8 @@ export default function Rooms() {
             height: 120,
             borderBottomLeftRadius: 24,
             borderBottomRightRadius: 24,
+            flexDirection: 'row',
+            justifyContent: 'space-between',
         },
         headerText: {
             fontSize: 28,
@@ -66,4 +74,12 @@ export default function Rooms() {
             marginTop: 61,
             marginLeft: 16,
         },
+        icons: {
+            flexDirection: 'row',
+            marginTop: 60,
+            marginRight: 16,
+        },
+        search: {
+            marginRight: 8,
+        }
 });
