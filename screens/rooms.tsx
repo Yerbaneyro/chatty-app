@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from 'react-native';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useFonts } from 'expo-font';
 import { SearchSvg, RoomsSvg } from '../components/svg-icons';
 import Rooms from '../components/single-room';
@@ -9,11 +9,20 @@ import { useQuery } from '@apollo/client';
 const RoomsData = () => {
     const { data, loading} = useQuery(GetRooms);
 
+    useEffect(() => {
+        console.log(data    );
+    }, [data]);
+
     if (loading) {
-        return <Text>Loading...</Text>
+        return <Text style={styles.loading}>Loading...</Text>
     }
 
-    return <Text>Conection Established</Text>
+    let roomNumber = 0
+
+    return data.usersRooms.rooms.map(room => {
+        roomNumber += 1
+        return <Rooms />
+    });
     
 }
 
@@ -30,7 +39,6 @@ export default function RoomsScreen() {
     return (
         <View>
             <Header />
-            <Rooms />
             <RoomsData />
         </View>
     );
@@ -56,6 +64,7 @@ function Header() {
             borderBottomRightRadius: 24,
             flexDirection: 'row',
             justifyContent: 'space-between',
+            marginBottom: 36,
         },
         headerText: {
             fontSize: 28,
@@ -71,5 +80,11 @@ function Header() {
         },
         search: {
             marginRight: 8,
+        },
+        loading: {
+            textAlign: 'center',
+            fontSize: 30,
+            fontFamily: 'Poppins',
+            color: '#5603AD',
         }
 });

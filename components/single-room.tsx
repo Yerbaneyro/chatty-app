@@ -42,7 +42,7 @@ function LastActivity() {
 
 const styles = StyleSheet.create ({
     roombox: {
-        marginTop: 36,
+        marginBottom: 12,
         height: 88,
         backgroundColor: '#5603AD',
         borderRadius: 12,
