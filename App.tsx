@@ -1,14 +1,13 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import Rooms from './screens/rooms';
-
+import RoomsScreen from './screens/rooms';
 
 
 export default function App() {
 
   return (
     <View style={styles.container}>
-      <Rooms />
+      <RoomsScreen />
       <StatusBar style="auto" />
     </View>
   );
@@ -16,6 +15,6 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#fff',
+    backgroundColor: '#F0F8FF',
   }
 });

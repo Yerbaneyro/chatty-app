@@ -1,61 +1,36 @@
 import { StyleSheet, Text, View } from 'react-native';
-import { 
-    Poppins_100Thin,
-    Poppins_100Thin_Italic,
-    Poppins_200ExtraLight,
-    Poppins_200ExtraLight_Italic,
-    Poppins_300Light,
-    Poppins_300Light_Italic,
-    Poppins_400Regular,
-    Poppins_400Regular_Italic,
-    Poppins_500Medium,
-    Poppins_500Medium_Italic,
-    Poppins_600SemiBold,
-    Poppins_600SemiBold_Italic,
-    Poppins_700Bold,
-    Poppins_700Bold_Italic,
-    Poppins_800ExtraBold,
-    Poppins_800ExtraBold_Italic,
-    Poppins_900Black,
-    Poppins_900Black_Italic 
-} from '@expo-google-fonts/poppins';
 import { useFonts } from 'expo-font';
 import { SearchSvg, RoomsSvg } from '../components/svg-icons';
+import Rooms from '../components/single-room';
 
-export default function Rooms() {
+export default function RoomsScreen() {
 
-    let [fontLoaded, error] = useFonts({
-        Poppins_100Thin,
-        Poppins_100Thin_Italic,
-        Poppins_200ExtraLight,
-        Poppins_200ExtraLight_Italic,
-        Poppins_300Light,
-        Poppins_300Light_Italic,
-        Poppins_400Regular,
-        Poppins_400Regular_Italic,
-        Poppins_500Medium,
-        Poppins_500Medium_Italic,
-        Poppins_600SemiBold,
-        Poppins_600SemiBold_Italic,
-        Poppins_700Bold,
-        Poppins_700Bold_Italic,
-        Poppins_800ExtraBold,
-        Poppins_800ExtraBold_Italic,
-        Poppins_900Black,
-        Poppins_900Black_Italic 
-        });
+    const [loaded] = useFonts({
+        Poppins: require('../assets/fonts/Poppins-Bold.ttf'),
+    });
 
+    if (!loaded) {
+        return null;
+    }
 
+    return (
+        <View>
+            <Header />
+            <Rooms />
+        </View>
+    );
+}
+
+function Header() {
     return (
         <View style={styles.menu}>
             <Text style={styles.headerText}>Rooms</Text>
             <View style={styles.icons}>
                 <SearchSvg style={styles.search}/>
                 <RoomsSvg />
-            </View>
-                        
+            </View>            
         </View>
-    );
+    )
 }
 
     const styles = StyleSheet.create({
@@ -69,7 +44,7 @@ export default function Rooms() {
         },
         headerText: {
             fontSize: 28,
-            fontFamily: 'Poppins_700Bold',
+            fontFamily: 'Poppins',
             color: '#5603AD',
             marginTop: 61,
             marginLeft: 16,
