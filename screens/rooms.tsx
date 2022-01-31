@@ -33,9 +33,9 @@ const client = new ApolloClient({
 const RoomsData = () => {
     const { data, loading} = useQuery(GetRooms);
 
-useEffect(() => {
-    console.log(data)
-}, [data])
+    if (loading) {
+        return <Text>Loading...</Text>
+    }
 
     return <Text>Conection Established</Text>
     
