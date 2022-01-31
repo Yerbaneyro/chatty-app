@@ -10,7 +10,7 @@ const RoomsData = () => {
     const { data, loading} = useQuery(GetRooms);
 
     useEffect(() => {
-        console.log(data    );
+        console.log(data);
     }, [data]);
 
     if (loading) {
@@ -20,8 +20,8 @@ const RoomsData = () => {
     let roomNumber = 0
 
     return data.usersRooms.rooms.map(room => {
-        roomNumber += 1
-        return <Rooms />
+        console.log(room.name)
+        return <Rooms name={room.name}/>
     });
     
 }
@@ -39,7 +39,7 @@ export default function RoomsScreen() {
     return (
         <View>
             <Header />
-            <RoomsData />
+            <RoomsData/>
         </View>
     );
 }

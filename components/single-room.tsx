@@ -3,17 +3,17 @@ import { ProfileSVG } from './svg-icons';
 import { useFonts } from 'expo-font';
 
 
-export default function Rooms() {
+export default function Rooms(props) {
     return (
         <View style={styles.roombox}>
             <ProfileSVG style={styles.profile} />
-            <RoomText />
+            <RoomText name={props}/>
             <LastActivity />
         </View>   
     )
 }
 
-function RoomText() {
+function RoomText(props) {
     const [loaded] = useFonts({
         SFCompactText: require('../assets/fonts/SFCompactText-Regular.ttf'),
         Poppins: require('../assets/fonts/Poppins-Medium.ttf')
@@ -25,8 +25,9 @@ function RoomText() {
 
 
     return (
+        console.log(props.name),
         <View style={styles.roomTextContainer}>
-            <Text style={styles.roomName}>Room Name</Text>
+            <Text style={styles.roomName}>{Object.values(props.name)}</Text>
             <Text style={styles.lastMessage}>Last Message</Text>
         </View>
     )
@@ -62,13 +63,13 @@ const styles = StyleSheet.create ({
     },
     roomName: {
         fontFamily: 'Poppins',
-        fontSize: 15,
+        fontSize: 13,
         color: '#FFFFFF',
         width: 242,
     },
     lastMessage: {
         fontFamily: 'SFCompactText',
-        fontSize: 14,
+        fontSize: 12,
         color: '#F0F8FF',
     },
     activity: {
