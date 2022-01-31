@@ -35,7 +35,7 @@ function RoomText() {
 function LastActivity() {
     return (
         <View style={styles.activity}>
-            <text></text>
+            <Text></Text>
         </View>
     )
 }
