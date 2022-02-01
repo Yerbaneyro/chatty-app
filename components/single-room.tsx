@@ -18,7 +18,9 @@ export default function Rooms(props) {
     }
 
     return (
-        <TouchableOpacity style={styles.roombox} onPress={() => navigation.navigate('Chat')}>
+        <TouchableOpacity style={styles.roombox} onPress={() => {
+            navigation.navigate('Chat', { roomName: props.name})
+            }}>
             <ProfileSvg style={styles.profile} />
             <View style={styles.roomTextContainer}>
                 <Text style={styles.roomName}>{Object.values(props.name)}</Text>

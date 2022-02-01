@@ -1,5 +1,4 @@
 import { StyleSheet, Text, View } from 'react-native';
-import { useEffect, useState } from 'react';
 import { useFonts } from 'expo-font';
 import { SearchSvg, RoomsSvg } from '../components/svg-icons';
 import Rooms from '../components/single-room';
@@ -9,9 +8,6 @@ import { useQuery } from '@apollo/client';
 const RoomsData = () => {
     const { data, loading} = useQuery(GetRooms);
 
-    useEffect(() => {
-        console.log(data);
-    }, [data]);
 
     if (loading) {
         return <Text style={styles.loading}>Loading...</Text>
@@ -20,8 +16,7 @@ const RoomsData = () => {
     let roomNumber = 0
 
     return data.usersRooms.rooms.map(room => {
-        console.log(room.name)
-        return <Rooms key={room.id} name={room.name} />
+        return <Rooms key={room.id} id={room.id} name={room.name} />
     });
     
 }

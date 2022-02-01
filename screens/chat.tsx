@@ -2,8 +2,22 @@ import { StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
 import { PhoneSvg, VideoSvg, ProfileSvg } from '../components/svg-icons';
 import { useNavigation } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
+import ChatRoom from '../components/chat-room';
 
-export default function ChatHeader() {
+export default function ChatScreen({route}) {
+    
+    let roomData = route.params
+
+    return (
+        <View>
+            <ChatHeader />
+            <ChatRoom roomName={roomData}/>
+        </View>
+    )
+}
+
+function ChatHeader() {
+
     const [loaded] = useFonts({
         SFCompactText: require('../assets/fonts/SFCompactText-Regular.ttf'),
         Poppins: require('../assets/fonts/Poppins-Medium.ttf')
@@ -15,7 +29,8 @@ export default function ChatHeader() {
         return null;
     }
 
-    return (
+
+    return(
         <View style={styles.chatMenu}>
             <View style={styles.headerLeftContainer}>
                 <TouchableOpacity onPress={() => navigation.navigate('Home')}>
@@ -23,7 +38,7 @@ export default function ChatHeader() {
                 </TouchableOpacity>
                 <ProfileSvg style={styles.profilePicture}/>
                 <View style={styles.chatHeaderText}>
-                    <Text style={styles.headerUser}>User</Text>
+                    <Text style={styles.headerUser}>User Name</Text>
                     <Text style={styles.activityChat}>Active now</Text>
                 </View>
             </View>
@@ -33,6 +48,7 @@ export default function ChatHeader() {
             </View>  
         </View>
     )
+
 }
 
 const styles = StyleSheet.create({

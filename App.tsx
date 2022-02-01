@@ -1,11 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, View } from 'react-native';
-import { ApolloClient, createHttpLink, InMemoryCache, ApolloProvider, useQuery } from '@apollo/client';
+import { ApolloClient, createHttpLink, InMemoryCache, ApolloProvider} from '@apollo/client';
 import { setContext } from 'apollo-link-context'
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import ChatHeader from './screens/chat';
 import RoomsScreen from './screens/rooms';
+import ChatScreen from './screens/chat';
 
 
 const httpLink = createHttpLink({
@@ -31,13 +31,11 @@ const client = new ApolloClient({
 
 function HomeScreen() {
   return (
-    <ApolloProvider client={client}>
       <View style={styles.container}>
         <RoomsScreen />
         <StatusBar style="auto" />
       </View>
-    </ApolloProvider>
-  )
+    )
 }
 
 const Stack = createNativeStackNavigator();
@@ -45,12 +43,14 @@ const Stack = createNativeStackNavigator();
 export default function App() {
 
   return (
-    <NavigationContainer>
-        <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="Home" >
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Chat" component={ChatHeader} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <ApolloProvider client={client}>
+      <NavigationContainer>
+          <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="Home" >
+          <Stack.Screen name="Home" component={HomeScreen} />
+          <Stack.Screen name="Chat" component={ChatScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </ApolloProvider>
   );
 }
 
