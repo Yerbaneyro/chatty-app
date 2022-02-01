@@ -9,7 +9,7 @@ export default function ChatScreen({route}) {
     let roomData = route.params
 
     return (
-        <View>
+        <View style={styles.chatContainer}>
             <ChatHeader />
             <ChatRoom roomName={roomData}/>
         </View>
@@ -52,6 +52,11 @@ function ChatHeader() {
 }
 
 const styles = StyleSheet.create({
+    chatContainer: {
+        flex: 1,
+        display: 'flex',
+        justifyContent: 'space-between',
+    },
     chatMenu: {
         backgroundColor: '#B6DEFD',
         height: 120,
