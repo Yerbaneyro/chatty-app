@@ -3,15 +3,15 @@ import { useFonts } from 'expo-font';
 import React, { useState, useCallback, useEffect } from 'react'
 import { GiftedChat } from 'react-native-gifted-chat'
 import { gql, useQuery } from "@apollo/client";
-import { GetMessages } from '../graphql/get-messages';
+import GetMessages from '../graphql/get-messages';
 
 let messagesData = null
 let message = []
 
 
 
-const RoomsData = () => {
-    const { data, loading} = useQuery(GetMessages);
+const RoomsData = (props) => {
+    const { data, loading} = useQuery(GetMessages(props.id));
 
 
     if (loading) {
@@ -21,7 +21,6 @@ const RoomsData = () => {
     return (
         messagesData = data.room.messages,
         messagesData.map(message => {
-            console.log(message.body)
         }),
         message = messagesData.map(message => (
             {
@@ -34,7 +33,6 @@ const RoomsData = () => {
             avatar: 'https://placeimg.com/140/140/any',
             },
         })),
-        console.log(message),
         <Text>Done</Text>
     )
     
@@ -43,10 +41,10 @@ const RoomsData = () => {
 
 export default function ChatRoom(props) {
 
+    let roomId = props.roomName.id
+
 
     const [messages, setMessages] = useState([]);
-
-    
 
 
     useEffect(() => {
@@ -57,9 +55,11 @@ export default function ChatRoom(props) {
         setMessages(previousMessages => GiftedChat.append(previousMessages, messages))
     }, [])
 
+
+
     return (
         <View style={styles.underHeader}>
-            <RoomsData />
+            <RoomsData id={roomId}/>
             <GiftedChat
             messages={messages}
             onSend={messages => onSend(messages)}

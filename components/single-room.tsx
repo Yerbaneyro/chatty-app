@@ -19,7 +19,7 @@ export default function Rooms(props) {
 
     return (
         <TouchableOpacity style={styles.roombox} onPress={() => {
-            navigation.navigate('Chat', { roomName: props.name})
+            navigation.navigate('Chat', { roomName: props.name, id: props.id })
             }}>
             <ProfileSvg style={styles.profile} />
             <View style={styles.roomTextContainer}>
