@@ -6,36 +6,29 @@ import { useNavigation } from '@react-navigation/native';
 
 export default function Rooms(props) {
 
-    const navigation = useNavigation();
-
-    return (
-        <TouchableOpacity style={styles.roombox} onPress={() => navigation.navigate('Chat')}>
-            <ProfileSvg style={styles.profile} />
-            <RoomText name={props}/>
-            <LastActivity />
-        </TouchableOpacity>   
-    )
-}
-
-function RoomText(props) {
     const [loaded] = useFonts({
         SFCompactText: require('../assets/fonts/SFCompactText-Regular.ttf'),
         Poppins: require('../assets/fonts/Poppins-Medium.ttf')
     });
 
+    const navigation = useNavigation();
+
     if (!loaded) {
         return null;
     }
 
-
     return (
-        console.log(props.name),
-        <View style={styles.roomTextContainer}>
-            <Text style={styles.roomName}>{Object.values(props.name)}</Text>
-            <Text style={styles.lastMessage}>Last Message</Text>
-        </View>
+        <TouchableOpacity style={styles.roombox} onPress={() => navigation.navigate('Chat')}>
+            <ProfileSvg style={styles.profile} />
+            <View style={styles.roomTextContainer}>
+                <Text style={styles.roomName}>{Object.values(props.name)}</Text>
+                <Text style={styles.lastMessage}>Last Message</Text>
+            </View>
+            <LastActivity />
+        </TouchableOpacity>   
     )
 }
+
 
 function LastActivity() {
     return (
