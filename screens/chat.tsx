@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
-import { PhoneSvg, VideoSvg, ProfileSvg, BackButtonSvg } from '../components/svg-icons';
+import { PhoneSvg, VideoSvg, ProfileSvg } from '../components/svg-icons';
 import { useNavigation } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
 
@@ -9,11 +9,11 @@ export default function ChatHeader() {
         Poppins: require('../assets/fonts/Poppins-Medium.ttf')
     });
 
+    const navigation = useNavigation();
+
     if (!loaded) {
         return null;
     }
-
-    const navigation = useNavigation();
 
     return (
         <View style={styles.chatMenu}>
@@ -22,21 +22,15 @@ export default function ChatHeader() {
                     <Image source={require('../assets/Icons/left-arrow.png')} style={styles.backButton}/>
                 </TouchableOpacity>
                 <ProfileSvg style={styles.profilePicture}/>
-                <HeaderChatText />
+                <View style={styles.chatHeaderText}>
+                    <Text style={styles.headerUser}>User</Text>
+                    <Text style={styles.activityChat}>Active now</Text>
+                </View>
             </View>
             <View style={styles.icons}>
                 <PhoneSvg style={styles.search}/>
                 <VideoSvg />
             </View>  
-        </View>
-    )
-}
-
-function HeaderChatText() {
-    return (
-        <View style={styles.chatHeaderText}>
-            <Text style={styles.headerUser}>User</Text>
-            <Text style={styles.activityChat}>Active now</Text>
         </View>
     )
 }

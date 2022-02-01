@@ -21,7 +21,7 @@ const RoomsData = () => {
 
     return data.usersRooms.rooms.map(room => {
         console.log(room.name)
-        return <Rooms name={room.name} />
+        return <Rooms key={room.id} name={room.name} />
     });
     
 }
