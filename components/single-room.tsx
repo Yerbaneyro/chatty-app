@@ -1,15 +1,19 @@
-import { StyleSheet, Text, Image, View } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { ProfileSVG } from './svg-icons';
 import { useFonts } from 'expo-font';
+import { useNavigation } from '@react-navigation/native';
 
 
 export default function Rooms(props) {
+    
+    const navigation = useNavigation();
+
     return (
-        <View style={styles.roombox}>
+        <TouchableOpacity style={styles.roombox} onPress={() => navigation.navigate('Chat')}>
             <ProfileSVG style={styles.profile} />
             <RoomText name={props}/>
             <LastActivity />
-        </View>   
+        </TouchableOpacity>   
     )
 }
 
