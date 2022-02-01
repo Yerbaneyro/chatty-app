@@ -13,8 +13,6 @@ const RoomsData = () => {
         return <Text style={styles.loading}>Loading...</Text>
     }
 
-    let roomNumber = 0
-
     return data.usersRooms.rooms.map(room => {
         return <Rooms key={room.id} id={room.id} name={room.name} />
     });
