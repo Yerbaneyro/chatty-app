@@ -6,6 +6,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import RoomsScreen from './screens/rooms';
 import ChatScreen from './screens/chat';
+import { tokenKey } from './token';
 
 
 const httpLink = createHttpLink({
@@ -14,7 +15,8 @@ const httpLink = createHttpLink({
 
 const authLink = setContext((_, { headers }) => {
     
-    const token = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJjaGF0bHkiLCJleHAiOjE2NDU1MjMzMzIsImlhdCI6MTY0MzEwNDEzMiwiaXNzIjoiY2hhdGx5IiwianRpIjoiZmY0MjQxMjItNmQ4OS00ZTIxLTk5NzktMTJjMWFlNGYyMmMzIiwibmJmIjoxNjQzMTA0MTMxLCJzdWIiOiJiMzIwZWJiYi0wMmI5LTRmNzgtYmE5Yy1kMjY0NzQyMjA1YWEiLCJ0eXAiOiJhY2Nlc3MifQ.DdXRS-Hr4q3gKMLSIlN2DH0TeVc0kjw885A67dPn4_IPho70HEK91EjyGAiF3OWyFmCk9N9-g01FcQ7I3aPHbw';
+  // Replace this token in token.tsx inside root DIR incase that you want to use yours account.
+    const token = tokenKey;
     
     return {
         headers: {
@@ -24,6 +26,7 @@ const authLink = setContext((_, { headers }) => {
     }
 });
 
+// Good place to start working with Errors 
 const client = new ApolloClient({
     link: authLink.concat(httpLink),
     cache: new InMemoryCache()
@@ -53,7 +56,7 @@ export default function App() {
     </ApolloProvider>
   );
 }
-
+//Style should be managed in separate file.
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#F0F8FF',

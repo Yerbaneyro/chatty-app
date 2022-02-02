@@ -5,13 +5,11 @@ import { useFonts } from 'expo-font';
 import ChatRoom from '../components/chat-room';
 
 export default function ChatScreen({route}) {
-    
-    let roomData = route.params
 
     return (
         <View style={styles.chatContainer}>
-            <ChatHeader user={roomData}/>
-            <ChatRoom roomName={roomData}/>
+            <ChatHeader user={route.params}/>
+            <ChatRoom roomName={route.params}/>
         </View>
     )
 }
@@ -23,6 +21,7 @@ function ChatHeader(props) {
         Poppins: require('../assets/fonts/Poppins-Medium.ttf')
     });
 
+    //useNavigation is important here to navigate betwen the rooms on Rooms Screen
     const navigation = useNavigation();
 
     if (!loaded) {

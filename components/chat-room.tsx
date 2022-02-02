@@ -8,7 +8,7 @@ import { useFonts } from 'expo-font';
 import { currentUser } from '../graphql/current-user'
 import { SendSvg } from './svg-icons';
 
-
+// THIS VARIABLE CREATING PROBLEMS WITH UPLOADING DATA SHOULD BE REPLEACED BY useState
 let messagesData = null
 let message = []
 let userData = {}
@@ -33,9 +33,9 @@ const RoomsData = (props) => {
             text: `${ message.body }`,
             createdAt: `${message.insertedAt}`,
             user: {
-                _id: `${message.user.id}`,
-                name: `${message.user.firstName}`,
-                avatar: 'https://placeimg.com/140/140/any',
+            _id: `${message.user.id}`,
+            name: `${message.user.firstName}`,
+            avatar: 'https://placeimg.com/140/140/any',
             },
         })),
         <Text></Text>
@@ -49,14 +49,15 @@ export default function ChatRoom(props) {
     let roomId = props.roomName.id
 
     const { data:user, loading:userLoading} = useQuery(currentUser);
+
     const [messages, setMessages] = useState([]);
 
     useEffect(() => {
         setMessages(message)
     }, []);
 
-
     const [sendMessage, { data }] = useMutation(addNewMessage);
+    
     const onSend = (previousMessages = []) => {
         setMessages(GiftedChat.append(previousMessages, messages));
 
@@ -78,7 +79,7 @@ export default function ChatRoom(props) {
         SFCompactText: require('../assets/fonts/SFCompactText-Regular.ttf'),
     });
     
-
+    //Bit of Loading management
     if (!loaded) {
         return null;
     }

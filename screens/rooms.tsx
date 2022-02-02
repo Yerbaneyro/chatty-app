@@ -17,6 +17,8 @@ const RoomsData = () => {
     }
 
     return (
+        // userName is used to show a name inside the Chat Header...currently is showing
+        // name of current user so its wrong...data should be taken from other query.
         userName = `${data.usersRooms.user.firstName + ' ' + data.usersRooms.user.lastName } `,
         data.usersRooms.rooms.map(room => {
         return (<Rooms key={room.id} id={room.id} name={room.name} user={userName}/>)
