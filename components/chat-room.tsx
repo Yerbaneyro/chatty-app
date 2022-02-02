@@ -1,6 +1,6 @@
-import { StyleSheet, Text, View, TouchableOpacity, TextInput } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import React, { useState, useEffect } from 'react'
-import { GiftedChat, Bubble, InputToolbar } from 'react-native-gifted-chat'
+import { GiftedChat, Bubble, InputToolbar, Composer } from 'react-native-gifted-chat'
 import { useQuery, useMutation } from "@apollo/client";
 import GetMessages from '../graphql/get-messages';
 import { addNewMessage } from '../graphql/add-message'
@@ -97,6 +97,7 @@ export default function ChatRoom(props) {
             onSend={messages => onSend(messages)}
             maxComposerHeight={80}
             bottomOffset={-40}
+            alwaysShowSend
             renderChatFooter={() => <View style={{ height: 88 }} />}
             renderInputToolbar={props => {
                 return (
@@ -151,10 +152,9 @@ export default function ChatRoom(props) {
                 }} 
             renderComposer={props => {
                 return (
-                    <TextInput 
+                    <Composer
                     {...props}
-                    placeholder='Welcome to Chatty...type here...'
-                    style={styles.composer}
+                    textInputProps={styles.composer}
                     />
                 )
             }}
@@ -189,7 +189,8 @@ const styles = StyleSheet.create({
         borderTopLeftRadius: 12,
         borderTopRightRadius: 12,
         borderBottomLeftRadius: 12,
-        textAlign: 'center',
+        paddingLeft: 10,
+        paddingTop: 12,
     },
     loading: {
         textAlign: 'center',
