@@ -1,9 +1,10 @@
 import { StyleSheet, Text, View, } from 'react-native';
-import { useFonts } from 'expo-font';
 import React, { useState, useCallback, useEffect } from 'react'
 import { GiftedChat } from 'react-native-gifted-chat'
-import { gql, useQuery } from "@apollo/client";
+import { useQuery, useMutation } from "@apollo/client";
 import GetMessages from '../graphql/get-messages';
+import { addNewMessage } from '../graphql/add-message'
+
 
 let messagesData = null
 let message = []
@@ -11,7 +12,7 @@ let message = []
 
 
 const RoomsData = (props) => {
-    const { data, loading} = useQuery(GetMessages(props.id));
+    const { data, loading} = useQuery(GetMessages(props.id), { pollInterval: 500});
 
 
     if (loading) {
@@ -19,6 +20,7 @@ const RoomsData = (props) => {
     }
 
     return (
+        console.log('done'),
         messagesData = data.room.messages,
         messagesData.map(message => {
         }),
@@ -46,14 +48,29 @@ export default function ChatRoom(props) {
 
     const [messages, setMessages] = useState([]);
 
-
     useEffect(() => {
         setMessages(message)
-    }, [])
+    }, []);
 
-    const onSend = useCallback((messages = []) => {
-        setMessages(previousMessages => GiftedChat.append(previousMessages, messages))
-    }, [])
+
+    const [sendMessage, { data }] = useMutation(addNewMessage);
+
+    const onSend = (previousMessages = []) => {
+        setMessages(GiftedChat.append(previousMessages, messages));
+
+        previousMessages.forEach((message) => {
+            const { _id, text, createdAt, user } = message;
+
+            sendMessage({
+                variables: {
+                    roomId: roomId,
+                    body: text,
+                    insertedAt: createdAt,
+                },}
+                )
+            });
+        }
+            
 
 
 

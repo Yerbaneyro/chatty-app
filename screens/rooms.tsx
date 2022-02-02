@@ -6,7 +6,7 @@ import { GetRooms } from '../graphql/get-room';
 import { useQuery } from '@apollo/client';
 
 const RoomsData = () => {
-    const { data, loading} = useQuery(GetRooms);
+    const { data, loading} = useQuery(GetRooms, { pollInterval:500 });
 
 
     if (loading) {
