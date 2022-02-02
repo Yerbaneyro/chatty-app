@@ -1,7 +1,5 @@
 # chatty-app
 
-![alt text](https://www.pngfind.com/pngs/m/559-5596043_horde-technology-react-native-logo-hd-png-download.png)
-
 ## Issue with Sending Button & loading messages.
 
 #### Send Button Issue
