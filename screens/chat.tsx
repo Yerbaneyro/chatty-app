@@ -63,7 +63,6 @@ const styles = StyleSheet.create({
         borderBottomRightRadius: 24,
         flexDirection: 'row',
         justifyContent: 'space-between',
-        marginBottom: 36,
     },
     headerLeftContainer: {
         flexDirection: 'row',

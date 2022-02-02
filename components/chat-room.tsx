@@ -1,6 +1,6 @@
-import { StyleSheet, Text, View, } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, TextInput } from 'react-native';
 import React, { useState, useEffect } from 'react'
-import { GiftedChat, Bubble } from 'react-native-gifted-chat'
+import { GiftedChat, Bubble, InputToolbar } from 'react-native-gifted-chat'
 import { useQuery, useMutation } from "@apollo/client";
 import GetMessages from '../graphql/get-messages';
 import { addNewMessage } from '../graphql/add-message'
@@ -77,6 +77,7 @@ export default function ChatRoom(props) {
     const [loaded] = useFonts({
         SFCompactText: require('../assets/fonts/SFCompactText-Regular.ttf'),
     });
+    
 
     if (!loaded) {
         return null;
@@ -88,11 +89,29 @@ export default function ChatRoom(props) {
 
 
     return (
-        <View style={styles.underHeader}>
+        <View style={styles.messageContainer}>
             <RoomsData id={roomId}/>
             <GiftedChat
             messages={messages}
+            scrollToBottom
             onSend={messages => onSend(messages)}
+            maxComposerHeight={102}
+            renderInputToolbar={props => {
+                return (
+                    <InputToolbar
+                    {...props}
+                    containerStyle={{
+                    height: 102,
+                    backgroundColor: '#B6DEFD',
+                    paddingTop: 16,
+                    borderTopRightRadius: 12,
+                    borderTopLeftRadius: 12,
+                    borderColor: 'white',
+                    }}
+                    primaryStyle={{ alignItems: 'center' }}
+                />
+                )
+            }}
             renderBubble={props => {
                 return (
                     <Bubble
@@ -123,21 +142,52 @@ export default function ChatRoom(props) {
                 }}
             renderSend={props => {
                 return (
-                    <SendSvg />
+                    <TouchableOpacity onPress={() => {props.onSend({ text: props.text.trim() }, true)}} >
+                        <SendSvg style={styles.sendButton}/>
+                    </TouchableOpacity>    
                 )
-                }}    
+                }} 
+            renderComposer={props => {
+                return (
+                    <TextInput 
+                    {...props}
+                    placeholder='Welcome to Chatty...type here...'
+                    style={styles.composer}
+                    />
+                )
+            }}
             user={{
                 _id: `${user.user.id}`,
                 name: `${user.user.firstName + ' ' + user.user.lastName}`
             }}
             />
+                
         </View>
+        
     )
+
+    
 }
 
+
+
 const styles = StyleSheet.create({
-    underHeader: {
+    messageContainer: {
         flex: 1,    
+    },
+    sendButton: {
+        marginRight: 21,
+        marginLeft: 17,
+    },
+    composer: {
+        backgroundColor: 'white',
+        marginLeft: 16,
+        width: 287,
+        height: 41,
+        borderTopLeftRadius: 12,
+        borderTopRightRadius: 12,
+        borderBottomLeftRadius: 12,
+        textAlign: 'center',
     },
     loading: {
         textAlign: 'center',
