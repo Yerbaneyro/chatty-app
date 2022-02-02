@@ -5,14 +5,18 @@ import { useQuery, useMutation } from "@apollo/client";
 import GetMessages from '../graphql/get-messages';
 import { addNewMessage } from '../graphql/add-message'
 import { useFonts } from 'expo-font';
+import { currentUser } from '../graphql/current-user'
 
 
 let messagesData = null
 let message = []
+let userData = {}
+
 
 
 const RoomsData = (props) => {
     const { data, loading} = useQuery(GetMessages(props.id), { pollInterval: 500});
+    
 
     if (loading) {
         return <Text style={styles.loading}>Loading...</Text>
@@ -20,7 +24,6 @@ const RoomsData = (props) => {
 
     return (
         messagesData = data.room.messages,
-        console.log(data.room),
         messagesData.map(message => {
         }),
         message = messagesData.map(message => (
@@ -44,7 +47,7 @@ export default function ChatRoom(props) {
 
     let roomId = props.roomName.id
 
-
+    const { data:user, loading:userLoading} = useQuery(currentUser);
     const [messages, setMessages] = useState([]);
 
     useEffect(() => {
@@ -53,7 +56,6 @@ export default function ChatRoom(props) {
 
 
     const [sendMessage, { data }] = useMutation(addNewMessage);
-
     const onSend = (previousMessages = []) => {
         setMessages(GiftedChat.append(previousMessages, messages));
 
@@ -78,6 +80,11 @@ export default function ChatRoom(props) {
     if (!loaded) {
         return null;
     }
+
+    if (userLoading) {
+        return <Text style={styles.loading}>Loading...</Text>
+    }
+
 
     return (
         <View style={styles.underHeader}>
@@ -114,7 +121,8 @@ export default function ChatRoom(props) {
                 );
                 }}
             user={{
-                _id: "b320ebbb-02b9-4f78-ba9c-d264742205aa",
+                _id: `${user.user.id}`,
+                name: `${user.user.firstName + ' ' + user.user.lastName}`
             }}
             />
         </View>

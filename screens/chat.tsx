@@ -18,8 +18,6 @@ export default function ChatScreen({route}) {
 
 function ChatHeader(props) {
 
-    console.log(props)
-
     const [loaded] = useFonts({
         SFCompactText: require('../assets/fonts/SFCompactText-Regular.ttf'),
         Poppins: require('../assets/fonts/Poppins-Medium.ttf')
@@ -30,7 +28,6 @@ function ChatHeader(props) {
     if (!loaded) {
         return null;
     }
-
 
     return(
         <View style={styles.chatMenu}>
