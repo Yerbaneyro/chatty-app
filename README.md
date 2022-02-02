@@ -5,9 +5,9 @@
 #### Send Button Issue (SOLVED)
 
 In last version of app there is problem with send button. When user try to send a message it will not sending anything. Some fixing work at this point should be done.
-```dif
-+ I managed to solve it after time for my task end but its now working well...problem was related to element inside renderComposer in Gifted Chat tree. I fix it by importing Composer Class into the file use it in renderComposer instead of TextInput.
-```
+
+- [x] I managed to solve it after time for my task end but its now working well...problem was related to element inside renderComposer in Gifted Chat tree. I fix it by importing Composer Class into the file use it in renderComposer instead of TextInput.
+
 
 #### Loading Message Issue
 
