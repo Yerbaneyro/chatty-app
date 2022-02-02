@@ -24,4 +24,6 @@ Second issue is a problem with loading message data to the room. User have to en
 
 I had to use negative bottom offset to solve problem with keyboard that hide input toolbar. It was not possible to send any message so now is funtional...but some not good looking break betwen input toolbar and message bubbles shown when mobile keyboard shows.
 
+#### TypeScript
 
+Code is based on TypeScript but because I am still not very confident with using it I just focused on managing main task problems so I did not type. But i plan to use typing inside this app just for practice.
