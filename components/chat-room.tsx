@@ -20,15 +20,15 @@ const RoomsData = (props) => {
     }
 
     return (
-        console.log('done'),
         messagesData = data.room.messages,
+        console.log(messagesData),
         messagesData.map(message => {
         }),
         message = messagesData.map(message => (
             {
             _id: `${message.id}`,
             text: `${ message.body }`,
-            createdAt: new Date(),
+            createdAt: `${message.insertedAt}`,
             user: {
             _id: 2,
             name: 'React Native',
