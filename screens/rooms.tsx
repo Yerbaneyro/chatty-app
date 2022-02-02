@@ -1,9 +1,10 @@
 import { StyleSheet, Text, View } from 'react-native';
+import { useQuery } from '@apollo/client';
 import { useFonts } from 'expo-font';
+
 import { SearchSvg, RoomsSvg } from '../components/svg-icons';
 import Rooms from '../components/single-room';
 import { GetRooms } from '../graphql/get-room';
-import { useQuery } from '@apollo/client';
 
 const RoomsData = () => {
     const { data, loading} = useQuery(GetRooms, { pollInterval:500 });

@@ -1,19 +1,19 @@
 import { StyleSheet, Text, View, } from 'react-native';
-import React, { useState, useCallback, useEffect } from 'react'
-import { GiftedChat } from 'react-native-gifted-chat'
+import React, { useState, useEffect } from 'react'
+import { GiftedChat, Bubble } from 'react-native-gifted-chat'
 import { useQuery, useMutation } from "@apollo/client";
 import GetMessages from '../graphql/get-messages';
 import { addNewMessage } from '../graphql/add-message'
+import { useFonts } from 'expo-font';
 
 
 let messagesData = null
 let message = []
 
-
-
 const RoomsData = (props) => {
     const { data, loading} = useQuery(GetMessages(props.id), { pollInterval: 500});
 
+    
 
     if (loading) {
         return <Text style={styles.loading}>Loading...</Text>
@@ -35,7 +35,7 @@ const RoomsData = (props) => {
             avatar: 'https://placeimg.com/140/140/any',
             },
         })),
-        <Text>Done</Text>
+        <Text></Text>
     )
     
 }
@@ -72,7 +72,13 @@ export default function ChatRoom(props) {
         }
             
 
+    const [loaded] = useFonts({
+        SFCompactText: require('../assets/fonts/SFCompactText-Regular.ttf'),
+    });
 
+    if (!loaded) {
+        return null;
+    }
 
     return (
         <View style={styles.underHeader}>
@@ -80,6 +86,34 @@ export default function ChatRoom(props) {
             <GiftedChat
             messages={messages}
             onSend={messages => onSend(messages)}
+            renderBubble={props => {
+                return (
+                    <Bubble
+                    {...props}
+            
+                    textStyle={{
+                        right: {
+                        color: '#FFFFFF',
+                        fontFamily: "SFCompactText",
+                        fontSize: 14,
+                        },
+                        left: {
+                        color: '#1A1A1A',
+                        fontFamily: "SFCompactText",
+                        fontSize: 14,
+                        },
+                    }}
+                    wrapperStyle={{
+                        left: {
+                        backgroundColor: '#FFFFFF',
+                        },
+                        right: {
+                        backgroundColor: "#993AFC",
+                        },
+                    }}
+                    />
+                );
+                }}
             user={{
                 _id: 1,
             }}
