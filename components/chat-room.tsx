@@ -6,6 +6,7 @@ import GetMessages from '../graphql/get-messages';
 import { addNewMessage } from '../graphql/add-message'
 import { useFonts } from 'expo-font';
 import { currentUser } from '../graphql/current-user'
+import { SendSvg } from './svg-icons';
 
 
 let messagesData = null
@@ -120,6 +121,11 @@ export default function ChatRoom(props) {
                     />
                 );
                 }}
+            renderSend={props => {
+                return (
+                    <SendSvg />
+                )
+                }}    
             user={{
                 _id: `${user.user.id}`,
                 name: `${user.user.firstName + ' ' + user.user.lastName}`
