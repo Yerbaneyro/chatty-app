@@ -15,7 +15,7 @@ Chatty  app made with React Native + TS
 
 _In last version of app there is problem with send button. When user try to send a message app not sending anything. Some fixing work at this point should be done._
 
-- [x] **I managed to solve it after time for my task end but its now working well...problem was related to element inside renderComposer in Gifted Chat tree. I fix it by importing Composer Class into the file use it in renderComposer instead of TextInput.**
+- [x] **I managed to solve it after time for my task end but its now working well...problem was related to element inside render Composer in Gifted Chat tree. I fix it by importing Composer Class into the file use it in renderComposer instead of TextInput.**
 
 
 #### Loading Message Issue
