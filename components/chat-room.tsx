@@ -33,9 +33,9 @@ const RoomsData = (props) => {
             text: `${ message.body }`,
             createdAt: `${message.insertedAt}`,
             user: {
-            _id: `${message.user.id}`,
-            name: `${message.user.firstName}`,
-            avatar: 'https://placeimg.com/140/140/any',
+                _id: `${message.user.id}`,
+                name: `${message.user.firstName}`,
+                avatar: 'https://placeimg.com/140/140/any',
             },
         })),
         <Text></Text>
@@ -93,9 +93,10 @@ export default function ChatRoom(props) {
             <RoomsData id={roomId}/>
             <GiftedChat
             messages={messages}
-            scrollToBottom
             onSend={messages => onSend(messages)}
-            maxComposerHeight={102}
+            maxComposerHeight={80}
+            bottomOffset={-40}
+            renderChatFooter={() => <View style={{ height: 88 }} />}
             renderInputToolbar={props => {
                 return (
                     <InputToolbar
