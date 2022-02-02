@@ -4,7 +4,7 @@
 
 #### Send Button Issue
 
-In last version of app there is porblem with send button. When user try to send a message it will not sending anything. Some fixing work at this point should be done.
+In last version of app there is problem with send button. When user try to send a message it will not sending anything. Some fixing work at this point should be done.
 
 #### Loading Message Issue
 
