@@ -11,6 +11,10 @@ export default function GetMessages(id) {
                     id
                     body
                     insertedAt
+                    user {
+                        id
+                        firstName
+                    }
                 }
                 name
                 user {

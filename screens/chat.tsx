@@ -10,13 +10,15 @@ export default function ChatScreen({route}) {
 
     return (
         <View style={styles.chatContainer}>
-            <ChatHeader />
+            <ChatHeader user={roomData}/>
             <ChatRoom roomName={roomData}/>
         </View>
     )
 }
 
-function ChatHeader() {
+function ChatHeader(props) {
+
+    console.log(props)
 
     const [loaded] = useFonts({
         SFCompactText: require('../assets/fonts/SFCompactText-Regular.ttf'),
@@ -38,7 +40,7 @@ function ChatHeader() {
                 </TouchableOpacity>
                 <ProfileSvg style={styles.profilePicture}/>
                 <View style={styles.chatHeaderText}>
-                    <Text style={styles.headerUser}>User Name</Text>
+                    <Text style={styles.headerUser}>{props.user.user}</Text>
                     <Text style={styles.activityChat}>Active now</Text>
                 </View>
             </View>

@@ -6,6 +6,9 @@ import { SearchSvg, RoomsSvg } from '../components/svg-icons';
 import Rooms from '../components/single-room';
 import { GetRooms } from '../graphql/get-room';
 
+
+let userName = ""
+
 const RoomsData = () => {
     const { data, loading} = useQuery(GetRooms, { pollInterval:500 });
 
@@ -14,10 +17,11 @@ const RoomsData = () => {
         return <Text style={styles.loading}>Loading...</Text>
     }
 
-    return data.usersRooms.rooms.map(room => {
-        console.log(room.id)
-        return <Rooms key={room.id} id={room.id} name={room.name} />
-    });
+    return (
+        userName = `${data.usersRooms.user.firstName + ' ' + data.usersRooms.user.lastName } `,
+        data.usersRooms.rooms.map(room => {
+        return (<Rooms key={room.id} id={room.id} name={room.name} user={userName}/>)
+    }));
     
 }
 

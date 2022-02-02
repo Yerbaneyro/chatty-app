@@ -10,10 +10,9 @@ import { useFonts } from 'expo-font';
 let messagesData = null
 let message = []
 
+
 const RoomsData = (props) => {
     const { data, loading} = useQuery(GetMessages(props.id), { pollInterval: 500});
-
-    
 
     if (loading) {
         return <Text style={styles.loading}>Loading...</Text>
@@ -21,7 +20,7 @@ const RoomsData = (props) => {
 
     return (
         messagesData = data.room.messages,
-        console.log(messagesData),
+        console.log(data.room),
         messagesData.map(message => {
         }),
         message = messagesData.map(message => (
@@ -30,8 +29,8 @@ const RoomsData = (props) => {
             text: `${ message.body }`,
             createdAt: `${message.insertedAt}`,
             user: {
-            _id: 2,
-            name: 'React Native',
+            _id: `${message.user.id}`,
+            name: `${message.user.firstName}`,
             avatar: 'https://placeimg.com/140/140/any',
             },
         })),
@@ -115,7 +114,7 @@ export default function ChatRoom(props) {
                 );
                 }}
             user={{
-                _id: 1,
+                _id: "b320ebbb-02b9-4f78-ba9c-d264742205aa",
             }}
             />
         </View>
