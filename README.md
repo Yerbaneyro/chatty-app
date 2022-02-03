@@ -1,10 +1,22 @@
 # chatty-app
 
+## Last Stable Vesion
+
+After solving issue with Sending Button **current master verison is stable.**
+
+![Preview of chat screen](https://user-images.githubusercontent.com/94953520/152249272-72ae405a-b6c7-48df-a954-296776f4b74c.png)
+
+
+Chatty  app made with React Native + TS
+
 ## Issue with Sending Button & loading messages.
 
-#### Send Button Issue
+#### Send Button Issue **(SOLVED)**
 
-In last version of app there is problem with send button. When user try to send a message it will not sending anything. Some fixing work at this point should be done.
+_In last version of app there is problem with send button. When user try to send a message app not sending anything. Some fixing work at this point should be done._
+
+- [x] **I managed to solve it after time for my task end but its now working well...problem was related to element inside render Composer in Gifted Chat tree. I fix it by importing Composer Class into the file use it in renderComposer instead of TextInput.**
+
 
 #### Loading Message Issue
 
@@ -14,9 +26,6 @@ Second issue is a problem with loading message data to the room. User have to en
 
 I had to use negative bottom offset to solve problem with keyboard that hide input toolbar. It was not possible to send any message so now is funtional...but some not good looking break betwen input toolbar and message bubbles shown when mobile keyboard shows.
 
-## Last Working Vesion
+#### TypeScript
 
-It is a commit with title: Current User Data
-
-
-Chatty  app made with React Native + TS
+Code is based on TypeScript but because I am still not very confident with using it I just focused on managing main task problems so I did not type. But i plan to use typing inside this app just for practice.
