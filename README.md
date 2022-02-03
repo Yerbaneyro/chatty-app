@@ -2,7 +2,7 @@
 
 ## Last Stable Vesion
 
-After solving issue with Sending Button **current master verison is stable.**
+After solving issue with Sending Button **current master verison is stable and working great.**
 
 ![Preview of chat screen](https://user-images.githubusercontent.com/94953520/152249272-72ae405a-b6c7-48df-a954-296776f4b74c.png)
 
