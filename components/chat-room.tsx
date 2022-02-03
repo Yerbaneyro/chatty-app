@@ -11,17 +11,13 @@ import { SendSvg } from './svg-icons';
 
 export default function ChatRoom(props) {
 
-    console.log(props.roomName.id)
-
     const { data:user, loading:userLoading} = useQuery(currentUser);
     const { data:dataMessage, loading:messageLoading} = useQuery(GetMessages(props.roomName.id), { pollInterval: 500});
 
     const [messages, setMessages] = useState([]);
 
-    console.log(dataMessage)
-
-
     useEffect(() => {
+        //Waiting for data from useQuery
         if (dataMessage) {
 
         setMessages(
@@ -74,8 +70,6 @@ export default function ChatRoom(props) {
     if (messageLoading) {
         return <Text style={styles.loading}>Loading...</Text>
     }
-
-
 
 
     return (
@@ -158,8 +152,6 @@ export default function ChatRoom(props) {
 
     
 }
-
-
 
 const styles = StyleSheet.create({
     messageContainer: {
