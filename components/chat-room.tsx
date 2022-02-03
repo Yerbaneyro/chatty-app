@@ -1,60 +1,44 @@
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import React, { useState, useEffect } from 'react'
 import { GiftedChat, Bubble, InputToolbar, Composer } from 'react-native-gifted-chat'
-import { useQuery, useMutation } from "@apollo/client";
+import { useQuery, useMutation,useLazyQuery } from "@apollo/client";
 import GetMessages from '../graphql/get-messages';
 import { addNewMessage } from '../graphql/add-message'
 import { useFonts } from 'expo-font';
 import { currentUser } from '../graphql/current-user'
 import { SendSvg } from './svg-icons';
 
-// THIS VARIABLE CREATING PROBLEMS WITH UPLOADING DATA SHOULD BE REPLEACED BY useState
-let messagesData = null
-let message = []
-let userData = {}
-
-
-
-const RoomsData = (props) => {
-    const { data, loading} = useQuery(GetMessages(props.id), { pollInterval: 500});
-    
-
-    if (loading) {
-        return <Text style={styles.loading}>Loading...</Text>
-    }
-
-    return (
-        messagesData = data.room.messages,
-        messagesData.map(message => {
-        }),
-        message = messagesData.map(message => (
-            {
-            _id: `${message.id}`,
-            text: `${ message.body }`,
-            createdAt: `${message.insertedAt}`,
-            user: {
-            _id: `${message.user.id}`,
-            name: `${message.user.firstName}`,
-            avatar: 'https://placeimg.com/140/140/any',
-            },
-        })),
-        <Text></Text>
-    )
-    
-}
-
 
 export default function ChatRoom(props) {
 
-    let roomId = props.roomName.id
+    console.log(props.roomName.id)
 
     const { data:user, loading:userLoading} = useQuery(currentUser);
+    const { data:dataMessage, loading:messageLoading} = useQuery(GetMessages(props.roomName.id), { pollInterval: 500});
 
     const [messages, setMessages] = useState([]);
 
+    console.log(dataMessage)
+
+
     useEffect(() => {
-        setMessages(message)
-    }, []);
+        if (dataMessage) {
+
+        setMessages(
+            dataMessage.room.messages.map(message => (
+                {
+                _id: `${message.id}`,
+                text: `${ message.body }`,
+                createdAt: `${message.insertedAt}`,
+                user: {
+                _id: `${message.user.id}`,
+                name: `${message.user.firstName}`,
+                avatar: 'https://placeimg.com/140/140/any',
+                },
+            })),
+        );
+    }}, [dataMessage]);
+
 
     const [sendMessage, { data }] = useMutation(addNewMessage);
     
@@ -66,7 +50,7 @@ export default function ChatRoom(props) {
 
             sendMessage({
                 variables: {
-                    roomId: roomId,
+                    roomId: props.roomName.id,
                     body: text,
                     insertedAt: createdAt,
                 },}
@@ -87,11 +71,15 @@ export default function ChatRoom(props) {
     if (userLoading) {
         return <Text style={styles.loading}>Loading...</Text>
     }
+    if (messageLoading) {
+        return <Text style={styles.loading}>Loading...</Text>
+    }
+
+
 
 
     return (
         <View style={styles.messageContainer}>
-            <RoomsData id={roomId}/>
             <GiftedChat
             messages={messages}
             onSend={messages => onSend(messages)}
@@ -154,7 +142,7 @@ export default function ChatRoom(props) {
                 return (
                     <Composer
                     {...props}
-                    textInputProps={styles.composer}
+                    textInputStyle={styles.composer}
                     />
                 )
             }}
